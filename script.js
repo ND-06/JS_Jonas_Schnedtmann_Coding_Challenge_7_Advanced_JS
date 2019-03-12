@@ -20,47 +20,35 @@ c) correct answer (I would use a number for this)
 7. Suppose this code would be a plugin for other programmers to use in their code. So make sure that all your code is private and doesn't interfere with the other programmers code (Hint: we learned a special technique to do exactly that).
 */
 
-// 1
-
-var Question = function(question, answer, correct_number) {
+var Question = function (question, answer, correct_number) {
   this.question = question;
   this.answer = answer;
   this.correct_number = correct_number;
 };
 
-
-// 2
-
 var question1 = new Question('Do you think Javascript is the most amazing language in the world ?', ['0: Yes', ' 1: No', '2: Maybe'], 0 );
 var question2 = new Question('What is the instructor lastname\'s of this amazing course ?', ['0: Jonas Schnedermann', '1: Jonas Javascriptman', '2: Jonas Schnedtmann'], 2);
 var question3 = new Question('Which element is not an object in Javascript ?', ['0: Function', '1: Boolean', '2: Array'], 1);
 
-// 3 
-
 var questionArray = [question1, question2, question3];
 
-// 4
+var randomNumber = Math.floor(Math.random() * questionArray.length);
 
-var randomQuestion = questionArray[Math.floor(Math.random() * questionArray.length)];
 
-function displayQuestions() {
-  console.log(randomQuestion.question);
- 
-  for (var i = 0; i < randomQuestion.answer.length; i++) {
-    console.log(randomQuestion.answer[i]);
+Question.prototype.displayQuestions = function() {
+  console.log(questionArray[randomNumber].question);
+
+  for (var i = 0; i < this.answer.length; i++) {
+    console.log(this.answer[i]);
   }
-};
+}
 
-displayQuestions();
-
-// 5
+questionArray[randomNumber].displayQuestions();
  
 var userAnswer = parseInt(prompt('Select the correct answer by typing the right number.'));
 
-// 6
-
-function checkAnswer(input) {
-  if (input === randomQuestion.correct_number) {
+Question.prototype.checkAnswer = function(input) {
+  if (input === questionArray[randomNumber].correct_number) {
     console.log('Great, this is the right answer !');
   }
   else {
@@ -68,4 +56,7 @@ function checkAnswer(input) {
   }
 };
 
-checkAnswer(userAnswer);
+questionArray[randomNumber].checkAnswer(userAnswer);
+
+
+// 7
