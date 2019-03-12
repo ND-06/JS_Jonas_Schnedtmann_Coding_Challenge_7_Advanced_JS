@@ -20,43 +20,45 @@ c) correct answer (I would use a number for this)
 7. Suppose this code would be a plugin for other programmers to use in their code. So make sure that all your code is private and doesn't interfere with the other programmers code (Hint: we learned a special technique to do exactly that).
 */
 
-var Question = function (question, answer, correct_number) {
-  this.question = question;
-  this.answer = answer;
-  this.correct_number = correct_number;
-};
+(function(){
 
-var question1 = new Question('Do you think Javascript is the most amazing language in the world ?', ['0: Yes', ' 1: No', '2: Maybe'], 0 );
-var question2 = new Question('What is the instructor lastname\'s of this amazing course ?', ['0: Jonas Schnedermann', '1: Jonas Javascriptman', '2: Jonas Schnedtmann'], 2);
-var question3 = new Question('Which element is not an object in Javascript ?', ['0: Function', '1: Boolean', '2: Array'], 1);
+  var Question = function (question, answer, correct_number) {
+    this.question = question;
+    this.answer = answer;
+    this.correct_number = correct_number;
+  };
 
-var questionArray = [question1, question2, question3];
+  var question1 = new Question('Do you think Javascript is the most amazing language in the world ?', ['0: Yes', ' 1: No', '2: Maybe'], 0 );
+  var question2 = new Question('What is the instructor lastname\'s of this amazing course ?', ['0: Jonas Schnedermann', '1: Jonas Javascriptman', '2: Jonas Schnedtmann'], 2);
+  var question3 = new Question('Which element is not an object in Javascript ?', ['0: Function', '1: Boolean', '2: Array'], 1);
 
-var randomNumber = Math.floor(Math.random() * questionArray.length);
+  var questionArray = [question1, question2, question3];
 
+  var randomNumber = Math.floor(Math.random() * questionArray.length);
 
-Question.prototype.displayQuestions = function() {
-  console.log(questionArray[randomNumber].question);
+  Question.prototype.displayQuestions = function() {
+    console.log(questionArray[randomNumber].question);
 
-  for (var i = 0; i < this.answer.length; i++) {
-    console.log(this.answer[i]);
-  }
-}
+    for (var i = 0; i < this.answer.length; i++) {
+      console.log(this.answer[i]);
+    }
+  };
 
-questionArray[randomNumber].displayQuestions();
+  questionArray[randomNumber].displayQuestions();
  
-var userAnswer = parseInt(prompt('Select the correct answer by typing the right number.'));
+  var userAnswer = parseInt(prompt('Select the correct answer by typing the right number.'));
 
-Question.prototype.checkAnswer = function(input) {
-  if (input === questionArray[randomNumber].correct_number) {
-    console.log('Great, this is the right answer !');
-  }
-  else {
-    console.log('Wrong, try again !');
-  }
-};
+  Question.prototype.checkAnswer = function(input) {
+    if (input === questionArray[randomNumber].correct_number) {
+      console.log('Great, this is the right answer !');
+    }
+    else {
+      console.log('Wrong, try again !');
+    }
+  };
 
-questionArray[randomNumber].checkAnswer(userAnswer);
+  questionArray[randomNumber].checkAnswer(userAnswer);
+
+})();
 
 
-// 7
